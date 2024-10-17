@@ -9,7 +9,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send('Hello from MERN stack!');
+  res.send(JSON.stringify({"Hi": 14, "Hi2": "Testing"
+  }));
 });
 
 app.listen(PORT, () => {
@@ -18,11 +19,14 @@ app.listen(PORT, () => {
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/mern-stack-app', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('Connected to MongoDB.');
-}).catch(error => {
-  console.error(error);
-});
+const connectDB = async () => {
+  try {
+    console.log(process.env.DB_URL)
+    await mongoose.connect(process.env.DB_URL, {});
+    console.log("CONNECTED TO DATABASE SUCCESSFULLY");
+  } catch (error) {
+    console.error("COULD NOT CONNECT TO DATABASE:", error.message);
+  }
+}
+
+connectDB()
