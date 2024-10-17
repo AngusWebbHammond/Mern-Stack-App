@@ -9,8 +9,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send(JSON.stringify({"Hi": 14, "Hi2": "Testing"
-  }));
+  res.send(JSON.stringify({"Hi": 14, "Hi2": "Testing"}));
 });
 
 app.listen(PORT, () => {
@@ -21,7 +20,6 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    console.log(process.env.DB_URL)
     await mongoose.connect(process.env.DB_URL, {});
     console.log("CONNECTED TO DATABASE SUCCESSFULLY");
   } catch (error) {
