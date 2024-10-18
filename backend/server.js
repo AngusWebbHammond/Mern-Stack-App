@@ -1,15 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const Todo = require('./models/todoModel')
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5050;
 
 app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send(JSON.stringify({"Hi": 14, "Hi2": "Testing"}));
+  async function selectTodosByType(type) {
+    const todoRes = Todo.find(
+      {"type": type}
+    );
+    const query = todoRes.select('_id title type description deadline');
+    const todoItem = await query.exec();
+    res.send(JSON.stringify(todoItem));
+  }
+  selectTodosByType(req.query.type);
 });
 
 app.listen(PORT, () => {
@@ -28,3 +37,11 @@ const connectDB = async () => {
 }
 
 connectDB()
+
+const createTodoItem = (title, type, description, deadline) => {Todo.create(
+  {
+    title: title,
+    type: type,
+    description: description,
+    deadline: deadline
+  })}
