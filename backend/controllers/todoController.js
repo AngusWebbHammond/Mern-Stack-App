@@ -28,7 +28,6 @@ exports.createTodo = (req, res) => {
 
 exports.deleteTodo = async (req, res) => {
     try {
-        console.log(typeof req.query._id)
         const id = req.query._id;
         const result = await Todo.findByIdAndDelete(id)
         res.send(result)

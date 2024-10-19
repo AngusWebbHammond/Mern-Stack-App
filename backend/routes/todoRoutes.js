@@ -9,7 +9,6 @@ router.post('/todo/create', async (req, res) => {
     try {
       todoController.createTodo(req, res);
       const todoTypes = await todoTypeController.getTodoTypes(req, res);
-      todoTypes.includes(req.query.type)
       if (!todoTypes.includes(req.query.type)) {
         todoTypeController.createTodoType(req, res);
       }
@@ -19,5 +18,6 @@ router.post('/todo/create', async (req, res) => {
     }
 });
 router.delete('/todo/delete', todoController.deleteTodo);
+router.post('/todo/list/create', todoTypeController.createTodoType);
 
 module.exports = router;

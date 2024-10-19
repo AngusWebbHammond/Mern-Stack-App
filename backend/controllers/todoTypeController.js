@@ -23,9 +23,15 @@ exports.getAllTodoTypes = async (req, res) => {
 
 exports.createTodoType = async (req, res) => {
     try {
-        TodoTypes.create({
-            title: req.query.type
-        })
+        const todoTypes = await this.getTodoTypes();
+        if (!todoTypes.includes(req.query.type)) {
+            await TodoTypes.create({
+                title: req.query.type
+            })        
+            res.send("Type Created Successfully")
+            return;
+        }
+        res.send("Type already added")
     } catch (error) {
         res.status(500).json({ error: 'An error occured while creating todo type'});
     }
