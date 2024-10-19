@@ -42,6 +42,10 @@ function TodoComponent() {
   }
 
   function addNewTodo (type: string): void {
+    fetch(`http://localhost:5050/api/todo/create?title=New Todo&type=${type}&priority=Low&description=New todo description&deadline=27 Oct 2024`, {method: 'POST'})
+    .then((res) => {
+      setIsDataUpdating(!isDataUpdating);
+    })
   }
 
   function addNewTodoList (): void {
