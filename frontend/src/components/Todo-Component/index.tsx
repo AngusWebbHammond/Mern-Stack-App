@@ -6,7 +6,7 @@ function TodoComponent() {
   const [data, setData] = useState<TodoType[] | null>(null);
   const [todoLists, setTodoLists] = useState<string[]>([]);
   useEffect(() => {
-    fetch('http://localhost:5050/todo/get/all', {method: 'GET'})
+    fetch('http://localhost:5050/api/todo/get/all', {method: 'GET'})
     .then((res) => {
       return res.json()
     })
@@ -14,7 +14,7 @@ function TodoComponent() {
       setData(resData);
     })
 
-    fetch('http://localhost:5050/todo/get/types', {method: 'GET'})
+    fetch('http://localhost:5050/api/todo/get/types', {method: 'GET'})
     .then((res) => {
       return res.json()
     })
