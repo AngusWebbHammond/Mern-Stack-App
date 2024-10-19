@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import TodoComponent from "../components/Todo-Component";
 
 const TodoBoard = () => {
 
@@ -17,19 +18,7 @@ const TodoBoard = () => {
   }, [])
   return (
     <div>
-      {apiResponse?.map((todo) => 
-        <div key={todo._id}>
-          <h1 className="text-xl font-bold">
-            {todo.title}
-          </h1>
-          <p>
-            {todo.description}
-          </p>
-          <h6>
-            {todo.deadline.slice(0,10)}
-          </h6>
-        </div>
-      )}
+      <TodoComponent/>
     </div>
   )
 }
