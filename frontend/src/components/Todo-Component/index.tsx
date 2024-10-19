@@ -5,6 +5,9 @@ import type { TodoType } from './types';
 function TodoComponent() {
   const [data, setData] = useState<TodoType[] | null>(null);
   const [todoLists, setTodoLists] = useState<string[]>([]);
+  const [isTitleUpdating, setIsTitleUpdating] = useState<boolean>(false);
+  const [isDataUpdating, setIsDataUpdating] = useState<boolean>(false);
+  
   useEffect(() => {
     fetch('http://localhost:5050/api/todo/get/all', {method: 'GET'})
     .then((res) => {
@@ -21,15 +24,21 @@ function TodoComponent() {
     .then((resData) => {
       setTodoLists(resData)
     })
-  }, [])
+  }, [isDataUpdating])
 
-  const [isTitleUpdating, setIsTitleUpdating] = useState<boolean>(false);
-  
   const h1TextStyling: string = 'text-black dark:text-white font-medium text-2xl flex justify-left';
   const h3TextStyling: string = 'text-gray-800 dark:text-gray-100 font-bold text-md flex justify-left items-center';
   const h4TextStyling: string = 'text-gray-700 dark:text-gray-300 font-normal text-sm flex justify-left';
 
   function deleteTodoItem (id: string): void {
+    fetch(`http://localhost:5050/api/todo/delete?_id=${id}`, {method: 'DELETE'})
+    .then((res) => {
+      return res.json()
+    })
+    .then((resData) => {
+      setIsDataUpdating(!isDataUpdating);
+      console.log(resData);
+    })
   }
 
   function addNewTodo (type: string): void {

@@ -18,5 +18,6 @@ router.post('/todo/create', async (req, res) => {
       res.status(500).json({ error: 'An error occured while adding to DB'})
     }
 });
+router.delete('/todo/delete', todoController.deleteTodo);
 
 module.exports = router;

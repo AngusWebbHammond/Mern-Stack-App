@@ -25,3 +25,14 @@ exports.createTodo = (req, res) => {
         res.status(500).json({ error: 'An error occured while creating new todo'})
     }
 };
+
+exports.deleteTodo = async (req, res) => {
+    try {
+        console.log(typeof req.query._id)
+        const id = req.query._id;
+        const result = await Todo.findByIdAndDelete(id)
+        res.send(result)
+    } catch (error) {
+        res.status(500).json({ error: 'An error occured while deleting a todo'})
+    }
+}
