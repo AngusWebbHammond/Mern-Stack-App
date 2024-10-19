@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
-function App() {
-  
-  const [apiResponse, setApiResponse] = useState<{_id: string, title: string, type: string, description: string, priority: string, deadline: string}[] | null>(null);
+const TodoBoard = () => {
+
+    const [apiResponse, setApiResponse] = useState<{_id: string, title: string, type: string, description: string, priority: string, deadline: string}[] | null>(null);
 
   useEffect(() => {
     fetch('http://localhost:5050/?type=Todo', {
@@ -15,7 +15,6 @@ function App() {
       setApiResponse(data);
     })
   }, [])
-
   return (
     <div>
       {apiResponse?.map((todo) => 
@@ -35,4 +34,4 @@ function App() {
   )
 }
 
-export default App
+export default TodoBoard
