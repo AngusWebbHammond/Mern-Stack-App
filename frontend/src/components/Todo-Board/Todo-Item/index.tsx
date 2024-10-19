@@ -21,9 +21,9 @@ type Props = {
   h3TextStyling: string,
   h4TextStyling: string,
   deleteTodoItem: (id: string) => void,
-  index: number,
-  setData: (data: TodoType[]) => void,
-  data: TodoType[],
+  index: number | undefined,
+  setData: (data: TodoType[] | null) => void,
+  data: TodoType[] | null,
   isTitleUpdating: boolean,
   setIsTitleUpdating: (isTitleUpdating: boolean) => void,
 }
@@ -37,116 +37,114 @@ const TodoItem = (props: Props) => {
   const [tempTitle, setTempTitle] = useState<string>(props.todoItemDict.title);
   const [tempDescription, setTempDescription] = useState<string>(props.todoItemDict.description);
 
-  const id: string = props.todoItemDict.id;
+  const id: string = props.todoItemDict._id;
   const title: string = props.todoItemDict.title;
   const type: string = props.todoItemDict.type;
-  const index: number = props.index;
+  const index: number | undefined = props.index;
 
-  useEffect(() => {
-    const element: HTMLDivElement | null = todoItemRef.current;
-    invariant(element);
+  // useEffect(() => {
+  //   const element: HTMLDivElement | null = todoItemRef.current;
+  //   invariant(element);
       
-    return combine(
-      draggable({
-        element: element,
-        getInitialData: () => ({ id, title, type, dragType: "todo-item" }),
-        onDragStart: () => setDragging(true),
-        onDrop: () => setDragging(false),
-      }), 
-      dropTargetForElements({
-        element: element,
-        onDragStart: (args) => {
-          if (args.source.data.dragType !== "todo-item") {
-            return;
-          }
-          setClosestEdge(extractClosestEdge(args.self.data));
-        },
-        onDragEnter: (args) => {
-          if (args.source.data.dragType !== "todo-item") {
-            return;
-          }
-          setClosestEdge(extractClosestEdge(args.self.data));
-        },
-        onDrag: (args) => {
-          if (closestEdge) {
-            return;
-          }
+  //   return combine(
+  //     draggable({
+  //       element: element,
+  //       getInitialData: () => ({ id, title, type, dragType: "todo-item" }),
+  //       onDragStart: () => setDragging(true),
+  //       onDrop: () => setDragging(false),
+  //     }), 
+  //     dropTargetForElements({
+  //       element: element,
+  //       onDragStart: (args) => {
+  //         if (args.source.data.dragType !== "todo-item") {
+  //           return;
+  //         }
+  //         setClosestEdge(extractClosestEdge(args.self.data));
+  //       },
+  //       onDragEnter: (args) => {
+  //         if (args.source.data.dragType !== "todo-item") {
+  //           return;
+  //         }
+  //         setClosestEdge(extractClosestEdge(args.self.data));
+  //       },
+  //       onDrag: (args) => {
+  //         if (closestEdge) {
+  //           return;
+  //         }
 
-          if (args.source.data.dragType !== "todo-item") {
-            return;
-          }
+  //         if (args.source.data.dragType !== "todo-item") {
+  //           return;
+  //         }
           
-          setClosestEdge(extractClosestEdge(args.self.data));
-        },
-        onDragLeave: () => {
-          setClosestEdge(null);
-        },
-        onDrop: () => {
-          setClosestEdge(null);
-        },
-        getData: ({input, element}) => {
-          const data: {id: string, type: string, index: number} = { 
-            id, type, index 
-          };
+  //         setClosestEdge(extractClosestEdge(args.self.data));
+  //       },
+  //       onDragLeave: () => {
+  //         setClosestEdge(null);
+  //       },
+  //       onDrop: () => {
+  //         setClosestEdge(null);
+  //       },
+  //       getData: ({input, element}) => {
+  //         const data: {id: string, type: string, index: number | undefined} = { 
+  //           id, type, index 
+  //         };
 
-          return attachClosestEdge(data, {
-            input,
-            element,
-            allowedEdges: ['top', 'bottom']
-          })
-        },
-      }),
-      monitorForElements({
-        onDrop: ({location, source}) => {
-          const target: DropTargetRecord = location.current.dropTargets[0];
-          if (!target) {
-            return;
-          }
+  //         return attachClosestEdge(data, {
+  //           input,
+  //           element,
+  //           allowedEdges: ['top', 'bottom']
+  //         })
+  //       },
+  //     }),
+  //     monitorForElements({
+  //       onDrop: ({location, source}) => {
+  //         const target: DropTargetRecord = location.current.dropTargets[0];
+  //         if (!target) {
+  //           return;
+  //         }
 
-          const sourceData: Record<string, unknown> = source.data;
-          const targetData: Record<string, unknown> = target.data;
+  //         const sourceData: Record<string, unknown> = source.data;
+  //         const targetData: Record<string, unknown> = target.data;
 
-          if (!sourceData || !targetData) {
-            return;
-          }
+  //         if (!sourceData || !targetData) {
+  //           return;
+  //         }
 
-          if (!sourceData.id || !targetData.id) {
-            return;
-          }
+  //         if (!sourceData.id || !targetData.id) {
+  //           return;
+  //         }
 
-          const indexOfSource: number = props.data.findIndex((item) => item.id === sourceData.id);
-          const indexOfTarget: number = props.data.findIndex((item) => item.id === targetData.id);
+  //         if (!props.data) return;
 
-          if (indexOfTarget < 0 || indexOfSource < 0) {
-            return;
-          }
+  //         const indexOfSource: number = props.data.findIndex((item) => item._id === sourceData.id);
+  //         const indexOfTarget: number = props.data.findIndex((item) => item._id === targetData.id);
 
-          const tempArr: TodoType[] = props.data;
-          tempArr[indexOfSource].type = tempArr[indexOfTarget].type;
-          const closestEdgeOfTarget: Edge | null = extractClosestEdge(targetData)
+  //         if (indexOfTarget < 0 || indexOfSource < 0) {
+  //           return;
+  //         }
 
-          flushSync(() => {
-            props.setData(
-              reorderWithEdge({
-                list: props.data,
-                startIndex: indexOfSource,
-                indexOfTarget,
-                closestEdgeOfTarget,
-                axis: 'vertical',
-              }),
-            );
-          });
-        }
-      })
-    )
-  }, [id, title, type, index, props.data]);
+  //         const tempArr: TodoType[] = props.data;
+  //         tempArr[indexOfSource].type = tempArr[indexOfTarget].type;
+  //         const closestEdgeOfTarget: Edge | null = extractClosestEdge(targetData)
+  //         if (!props.data) return;
+
+  //         // flushSync(() => {
+  //         //   props.setData(
+  //         //     reorderWithEdge({
+  //         //       list: props.data,
+  //         //       startIndex: indexOfSource,
+  //         //       indexOfTarget,
+  //         //       closestEdgeOfTarget,
+  //         //       axis: 'vertical',
+  //         //     }),
+  //         //   );
+  //         // });
+  //       }
+  //     })
+  //   )
+  // }, [id, title, type, index, props.data]);
 
   const updateTitle = (newTitle: string, newDescription: string, index: number) => {
-    const tempArr = props.data;
-    tempArr[index].title = newTitle;
-    tempArr[index].description = newDescription;
-    setIsEditing(false);
-    props.setIsTitleUpdating(!props.isTitleUpdating);
   }
 
   return (
@@ -165,6 +163,7 @@ const TodoItem = (props: Props) => {
                 onChange={(e) => setTempTitle(e.currentTarget.value)} 
                 onKeyUp={(e) => {
                   if (e.code === "Enter") {
+                    if (!props.index) return;
                     updateTitle(tempTitle, tempDescription, props.index);
                   }
               }}></input>:<h3 className={props.h3TextStyling}>{props.todoItemDict.title}</h3>}
@@ -175,6 +174,7 @@ const TodoItem = (props: Props) => {
                 onChange={(e) => setTempDescription(e.currentTarget.value)}
                 onKeyUp={(e) => {
                   if (e.code === "Enter") {
+                    if (!props.index) return;
                     updateTitle(tempTitle, tempDescription, props.index);
                   }}}
               />
@@ -190,7 +190,7 @@ const TodoItem = (props: Props) => {
                 `bg-red-600`} text-white rounded-full px-1 text-sm`}>{props.todoItemDict.priority}</h6>
               <div className='flex flex-row'>
                 <EditButton onClick={setIsEditing}/>
-                <DeleteButton item={props.todoItemDict.id} onClick={props.deleteTodoItem}/>
+                <DeleteButton item={props.todoItemDict._id} onClick={props.deleteTodoItem}/>
               </div>
             </div>
           </div>

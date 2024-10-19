@@ -5,7 +5,7 @@ import EditButton from "../Edit-Button";
 
 type Props = {
     todoTitle: string,
-    data: TodoType[],
+    data: TodoType[] | null,
     h1TextStyling: string,
     deleteTodoItemList: (title: string) => void,
     todoLists: string[],
@@ -13,7 +13,7 @@ type Props = {
     index: number,
     isTitleUpdating: boolean,
     setIsTitleUpdating: (isTitleUpdating: boolean) => void,
-    setData: (data: TodoType[]) => void,
+    setData: (data: TodoType[] | null) => void,
 }
 
 const TodoListTitle = (props: Props) => {
@@ -23,6 +23,7 @@ const TodoListTitle = (props: Props) => {
   const updateTitle = (newTitle: string, index: number, oldTitle: string): void => {
     const tempTodoArr = props.todoLists;
     tempTodoArr[index] = newTitle;
+    if (!props.data) return;
 
     const tempTodoItemArr = props.data;
 
@@ -52,7 +53,7 @@ const TodoListTitle = (props: Props) => {
                 }
             }}></input>
             :<h1 className={props.h1TextStyling}>{props.todoTitle}</h1>}
-            <span className='text-black dark:text-white bg-gray-200 dark:bg-slate-600 w-6 h-6 rounded-full flex justify-center items-center'>{props.data.filter((item) => item.type === props.todoTitle).length}</span>
+            <span className='text-black dark:text-white bg-gray-200 dark:bg-slate-600 w-6 h-6 rounded-full flex justify-center items-center'>{props.data?.filter((item) => item.type === props.todoTitle).length}</span>
         </div>
 
         <div className="flex flex-row gap-2">

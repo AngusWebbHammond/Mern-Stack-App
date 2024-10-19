@@ -14,12 +14,12 @@ import { TodoType } from "../../Todo-Component/types";
 
 type Props = {
     todoTitle: string,
-    data: TodoType[],
+    data: TodoType[] | null,
     h1TextStyling: string,
     h3TextStyling: string,
     h4TextStyling: string,
     todoLists: string[],
-    setData: (data: TodoType[]) => void,
+    setData: (data: TodoType[] | null) => void,
     addNewTodo: (title: string) => void,
     deleteTodoItem: (id: string) => void,
     deleteTodoItemList: (title: string) => void,
@@ -151,20 +151,20 @@ const TodoList = (props: Props) => {
                     deleteTodoItemList={props.deleteTodoItemList}/>
                 {/* Todo List Contents */}
                 <div className='bg-gray-200 dark:bg-slate-700 min-h-20 h-[43rem] flex flex-col overflow-auto p-3 gap-3'>
-                    {props.data.filter((item) => item.type === props.todoTitle).map((todoItemDict: TodoType) => (
+                    {props.data?.filter((item) => item.type === props.todoTitle).map((todoItemDict: TodoType) => (
                         <TodoItem 
                             isTitleUpdating={props.isTitleUpdating} 
                             setIsTitleUpdating={props.setIsTitleUpdating} 
-                            index={props.data.findIndex((item) => item.id === todoItemDict.id)} 
+                            index={props.data?.findIndex((item) => item._id === todoItemDict._id)} 
                             todoItemDict={todoItemDict} 
                             h3TextStyling={props.h3TextStyling} 
                             h4TextStyling={props.h4TextStyling} 
                             deleteTodoItem={props.deleteTodoItem} 
-                            key={todoItemDict.id} 
+                            key={todoItemDict._id} 
                             data={props.data} 
                             setData={props.setData}/>
                     ))}
-                    {props.data.filter((item) => item.type === props.todoTitle).length === 0 && <div ref={emptyRef}></div>}
+                    {props.data?.filter((item) => item.type === props.todoTitle).length === 0 && <div ref={emptyRef}></div>}
                 </div>
             </div>
             <div className="p-3">

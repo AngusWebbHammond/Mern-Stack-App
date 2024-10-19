@@ -4,55 +4,64 @@
       "title": "Create Todo List",
       "type": "Todo",
       "description": "",
-      "priority": "High"
+      "priority": "High",
+      "deadline": "24 Oct 2024"
     },
     {
       "id": "todo2",
       "title": "Learn Pragmatic Drag and Drop",
       "type": "Todo",
       "description": "Learning how to implement drag and drop.",
-      "priority": "High"
+      "priority": "High",
+      "deadline": "24 Oct 2024"
+
     },
     {
       "id": "todo3",
       "title": "Create Calculator App",
       "type": "Completed",
       "description": "",
-      "priority": "Low"
+      "priority": "Low",
+      "deadline": "24 Oct 2024"
     },
     {
       "id": "todo4",
       "title": "Learn Tailwind CSS",
       "type": "Todo",
       "description": "",
-      "priority": "Low"
+      "priority": "Low",
+      "deadline": "24 Oct 2024"
     },
     {
       "id": "todo5",
       "title": "Add a Completed List",
       "type": "Completed",
       "description": "",
-      "priority": "Low"
+      "priority": "Low",
+      "deadline": "24 Oct 2024"
     },
     {
       "id": "todo6",
       "title": "Style the Todo List",
       "type": "Completed",
       "description": "To be done through Tailwind CSS",
-      "priority": "High"
+      "priority": "High",
+      "deadline": "24 Oct 2024"
     },
     {
       "id": "todo7",
       "title": "Add a Todo Counter",
       "type": "Completed",
       "description": "",
-      "priority": "Medium"
+      "priority": "Medium",
+      "deadline": "24 Oct 2024"
     },
     {
       "id": "todo8",
       "title": "Add Sorting",
       "type": "Todo",
       "description": "",
-      "priority": "High"
+      "priority": "High",
+      "deadline": "24 Oct 2024"
     }
   ]
