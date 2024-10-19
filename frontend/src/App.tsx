@@ -2,22 +2,19 @@ import { useEffect, useState } from "react"
 
 function App() {
   
-  const [apiResponse, setApiResponse] = useState<{_id: string, title: string, type: string, description: string, priority: string, deadline: Date}[] | null>(null);
+  const [apiResponse, setApiResponse] = useState<{_id: string, title: string, type: string, description: string, priority: string, deadline: string}[] | null>(null);
 
   useEffect(() => {
     fetch('http://localhost:5050/?type=Todo', {
       method: 'GET',
-    }).then((res) => {
-      console.log(res)
+    })
+    .then((res) => {
       return res.json()
     })
     .then((data) => {
-      console.log(data);
       setApiResponse(data);
-    }
-    )
-  }
-    , [])
+    })
+  }, [])
 
   return (
     <div>
@@ -29,6 +26,9 @@ function App() {
           <p>
             {todo.description}
           </p>
+          <h6>
+            {todo.deadline.slice(0,10)}
+          </h6>
         </div>
       )}
     </div>

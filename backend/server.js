@@ -9,16 +9,26 @@ const PORT = process.env.PORT || 5050;
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-  async function selectTodosByType(type) {
-    const todoRes = Todo.find(
-      {"type": type}
-    );
-    const query = todoRes.select('_id title type description deadline');
-    const todoItem = await query.exec();
-    res.send(JSON.stringify(todoItem));
-  }
-  selectTodosByType(req.query.type);
+app.get('/', async (req, res) => {
+  const todoRes = Todo.find(
+    {"type": req.query.type}
+  );
+  const query = todoRes.select('_id title type description deadline');
+  const todoItem = await query.exec();
+  res.send(JSON.stringify(todoItem));
+});
+
+app.post('/', (req, res) => {
+  const deadline = new Date(req.query.deadline);
+  Todo.create(
+    {
+      title: req.query.title,
+      type: req.query.type,
+      description: req.query.description,
+      deadline: deadline
+    }
+  )
+  res.send("Added to MongoDB");
 });
 
 app.listen(PORT, () => {
@@ -37,11 +47,3 @@ const connectDB = async () => {
 }
 
 connectDB()
-
-const createTodoItem = (title, type, description, deadline) => {Todo.create(
-  {
-    title: title,
-    type: type,
-    description: description,
-    deadline: deadline
-  })}
