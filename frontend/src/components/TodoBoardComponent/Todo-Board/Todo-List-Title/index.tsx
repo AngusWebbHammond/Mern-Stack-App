@@ -32,12 +32,12 @@ const TodoListTitle = (props: Props) => {
               type='text' 
               autoFocus 
               value={tempTitle} 
-              // onChange={(e) => setTempTitle(e.currentTarget.value)} 
-              // onKeyUp={(e) => {
-              //   if (e.code === "Enter") {
-              //     const newValue = e.currentTarget.value;
-              //     updateTitle(newValue, props.index, props.todoListDict.title);
-              //   }}}
+              onChange={(e) => setTempTitle(e.currentTarget.value)} 
+              onKeyUp={(e) => {
+                if (e.code === "Enter") {
+                  const newValue = e.currentTarget.value;
+                  updateTitle(newValue, props.index, props.todoListDict.title);
+                }}}
                 ></input>
             :<h1 className={props.h1TextStyling}>{props.todoListDict.title}</h1>}
             <span className='text-black dark:text-white bg-gray-200 dark:bg-slate-600 w-6 h-6 rounded-full flex justify-center items-center'>{props.data?.filter((item) => item.type === props.todoListDict._id).length}</span>

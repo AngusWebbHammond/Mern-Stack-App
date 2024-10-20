@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react'
 import TodoBoard from '../components/TodoBoardComponent/Todo-Board';
 import type { TodoType, TodoTypeType } from '../types/todo-board-types';
+import TodoBoardList from '../components/TodoBoardComponent/Todo-Board-List';
 
-function TodoComponent() {
+type Props = {
+  type: string;
+}
+
+function TodoComponent(props: Props) {
   const [data, setData] = useState<TodoType[] | null>(null);
   const [todoLists, setTodoLists] = useState<TodoTypeType[]>([]);
   const [isTitleUpdating, setIsTitleUpdating] = useState<boolean>(false);
@@ -70,6 +75,7 @@ function TodoComponent() {
   
   return (
     <div className='flex flex-row gap-2 justify-center items-center h-screen bg-white dark:bg-slate-900'>
+      {props.type === "Board"?
       <TodoBoard 
         setTodoLists={setTodoLists} 
         h1TextStyling={h1TextStyling} 
@@ -83,7 +89,9 @@ function TodoComponent() {
         addNewTodoList={addNewTodoList} 
         deleteTodoItemList={deleteTodoItemList} 
         isTitleUpdating={isTitleUpdating} 
-        setIsTitleUpdating={setIsTitleUpdating}/>
+        setIsTitleUpdating={setIsTitleUpdating}/>:
+      <TodoBoardList/>
+      }
     </div>
     
   )
