@@ -4,7 +4,7 @@ import type { TodoType } from './types';
 
 function TodoComponent() {
   const [data, setData] = useState<TodoType[] | null>(null);
-  const [todoLists, setTodoLists] = useState<string[]>([]);
+  const [todoLists, setTodoLists] = useState<{_id: string, title: string}[]>([]);
   const [isTitleUpdating, setIsTitleUpdating] = useState<boolean>(false);
   const [isDataUpdating, setIsDataUpdating] = useState<boolean>(false);
   
@@ -41,10 +41,11 @@ function TodoComponent() {
     })
   }
 
-  function addNewTodo (type: string): void {
-    fetch(`http://localhost:5050/api/todo/create?title=New Todo&type=${type}&priority=Low&description=New todo description&deadline=27 Oct 2024`, {method: 'POST'})
+  function addNewTodo (typeID: string, type: string): void {
+    fetch(`http://localhost:5050/api/todo/create?title=New Todo&type=${type}&priority=Low&description=New todo description&deadline=27 Oct 2024&typeID=${typeID}`, {method: 'POST'})
     .then(() => {
       setIsDataUpdating(!isDataUpdating);
+      return;
     })
   }
 
@@ -56,6 +57,14 @@ function TodoComponent() {
   }
 
   function deleteTodoItemList (id: string): void {
+    fetch(`http://localhost:5050/api/todo/list/delete?id=${id}`, {method: 'DELETE'})
+    .then((res) => {
+      return res.json()
+    })
+    .then((resData) => {
+      setIsDataUpdating(!isDataUpdating);
+      console.log(resData);
+    })
   }
 
   

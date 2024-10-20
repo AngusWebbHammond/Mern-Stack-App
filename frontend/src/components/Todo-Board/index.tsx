@@ -6,14 +6,14 @@ type Props = {
     h1TextStyling: string,
     h3TextStyling: string,
     h4TextStyling: string,
-    todoLists: string[],
+    todoLists: {_id: string, title: string}[],
     data: TodoType[] | null,
     setData: (data: TodoType[] | null) => void,
-    addNewTodo: (title: string) => void,
+    addNewTodo: (id: string, title: string) => void,
     deleteTodoItem: (id: string) => void,
     addNewTodoList: () => void,
     deleteTodoItemList: (title: string) => void,
-    setTodoLists: (todoLists: string[]) => void,
+    setTodoLists: (todoLists: {_id: string, title: string}[]) => void,
     isTitleUpdating: boolean,
     setIsTitleUpdating: (isTitleUpdating: boolean) => void,
 }
@@ -21,14 +21,14 @@ type Props = {
 const TodoBoard = (props: Props) => {
   return (
     <div className='flex flex-row w-4/5 overflow-auto p-3 gap-3'>
-        {props.todoLists.map((todoTitle: string, index: number) => 
+        {props.todoLists.map((todoListDictItem, index: number) => 
             <TodoList 
               index={index} 
               isTitleUpdating={props.isTitleUpdating} 
               setIsTitleUpdating={props.setIsTitleUpdating} 
               setTodoLists={props.setTodoLists} 
               todoLists={props.todoLists} 
-              todoTitle={todoTitle} 
+              todoListDict={todoListDictItem} 
               h1TextStyling={props.h1TextStyling} 
               h3TextStyling={props.h3TextStyling} 
               h4TextStyling={props.h4TextStyling} 
@@ -37,7 +37,7 @@ const TodoBoard = (props: Props) => {
               addNewTodo={props.addNewTodo} 
               deleteTodoItem={props.deleteTodoItem} 
               deleteTodoItemList={props.deleteTodoItemList} 
-              key={todoTitle}/>
+              key={todoListDictItem._id}/>
         )}
         <AddNewTodoList 
           h3TextStyling={props.h3TextStyling} 

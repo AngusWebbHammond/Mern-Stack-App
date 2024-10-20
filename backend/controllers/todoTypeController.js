@@ -2,14 +2,9 @@ const TodoTypes = require('../models/todoTypeModel')
 
 exports.getTodoTypes = async () => {
     const todoRes = TodoTypes.find();
-    const query = todoRes.select('title');
+    const query = todoRes.select('_id title');
     const todoTypes = await query.exec();
-    const todoUniqueTypes = [];
-    todoTypes.map((item) => {
-        todoUniqueTypes.push(item.title);
-    })
-    const tempTodoUniqueTypes = JSON.stringify(todoUniqueTypes);
-    return tempTodoUniqueTypes;
+    return todoTypes;
 }
 
 exports.getAllTodoTypes = async (req, res) => {
@@ -34,5 +29,16 @@ exports.createTodoType = async (req, res) => {
         res.send("Type already added")
     } catch (error) {
         res.status(500).json({ error: 'An error occured while creating todo type'});
+    }
+}
+
+exports.deleteTodoType = async (req, res) => {
+    try {
+        const id = req.query.id;
+        const result = await TodoTypes.findByIdAndDelete(id)
+        
+        res.send(result)
+    } catch (error) {
+        res.status(500).json({ error: 'An error occured while deleting todo type'});
     }
 }

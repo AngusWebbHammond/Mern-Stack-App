@@ -4,12 +4,12 @@ import DeleteButton from "../Delete-Button";
 import EditButton from "../Edit-Button";
 
 type Props = {
-    todoTitle: string,
+    todoListDict: {_id: string, title: string},
     data: TodoType[] | null,
     h1TextStyling: string,
     deleteTodoItemList: (title: string) => void,
-    todoLists: string[],
-    setTodoLists: (todoLists: string[]) => void,
+    todoLists: {_id: string, title: string}[],
+    setTodoLists: (todoLists: {_id: string, title: string}[]) => void,
     index: number,
     isTitleUpdating: boolean,
     setIsTitleUpdating: (isTitleUpdating: boolean) => void,
@@ -18,22 +18,9 @@ type Props = {
 
 const TodoListTitle = (props: Props) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [tempTitle, setTempTitle] = useState<string>(props.todoTitle);
+  const [tempTitle, setTempTitle] = useState<string>(props.todoListDict.title);
 
   const updateTitle = (newTitle: string, index: number, oldTitle: string): void => {
-    const tempTodoArr = props.todoLists;
-    tempTodoArr[index] = newTitle;
-    if (!props.data) return;
-
-    const tempTodoItemArr = props.data;
-
-    for (let i = 0; i < tempTodoItemArr.length; i++) {
-      if (tempTodoItemArr[i].type === oldTitle) {
-        tempTodoItemArr[i].type = newTitle;
-      }
-    }
-    props.setIsTitleUpdating(!props.isTitleUpdating);
-    setIsEditing(false);
   }
 
   return (
@@ -45,20 +32,20 @@ const TodoListTitle = (props: Props) => {
               type='text' 
               autoFocus 
               value={tempTitle} 
-              onChange={(e) => setTempTitle(e.currentTarget.value)} 
-              onKeyUp={(e) => {
-                if (e.code === "Enter") {
-                  const newValue = e.currentTarget.value;
-                  updateTitle(newValue, props.index, props.todoTitle);
-                }
-            }}></input>
-            :<h1 className={props.h1TextStyling}>{props.todoTitle}</h1>}
-            <span className='text-black dark:text-white bg-gray-200 dark:bg-slate-600 w-6 h-6 rounded-full flex justify-center items-center'>{props.data?.filter((item) => item.type === props.todoTitle).length}</span>
+              // onChange={(e) => setTempTitle(e.currentTarget.value)} 
+              // onKeyUp={(e) => {
+              //   if (e.code === "Enter") {
+              //     const newValue = e.currentTarget.value;
+              //     updateTitle(newValue, props.index, props.todoListDict.title);
+              //   }}}
+                ></input>
+            :<h1 className={props.h1TextStyling}>{props.todoListDict.title}</h1>}
+            <span className='text-black dark:text-white bg-gray-200 dark:bg-slate-600 w-6 h-6 rounded-full flex justify-center items-center'>{props.data?.filter((item) => item.type === props.todoListDict.title).length}</span>
         </div>
 
         <div className="flex flex-row gap-2">
           <EditButton onClick={setIsEditing}/>
-          <DeleteButton item={props.todoTitle} onClick={props.deleteTodoItemList}/>
+          <DeleteButton item={props.todoListDict._id} onClick={props.deleteTodoItemList}/>
         </div>
     </div>
   )
