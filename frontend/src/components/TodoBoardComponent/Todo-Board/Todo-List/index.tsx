@@ -10,7 +10,7 @@ import TodoListTitle from "../Todo-List-Title"
 // import { DropTargetRecord } from "@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types";
 // import { flushSync } from "react-dom";
 // import { reorderWithEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge';
-import { TodoType, TodoTypeType } from "../../Todo-Component/types";
+import { TodoType, TodoTypeType } from "../../../../types/todo-board-types";
 
 type Props = {
     todoListDict: TodoTypeType,

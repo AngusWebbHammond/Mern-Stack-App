@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TodoType, TodoTypeType } from "../../Todo-Component/types";
+import { TodoType, TodoTypeType } from "../../../../types/todo-board-types";
 import DeleteButton from "../Delete-Button";
 import EditButton from "../Edit-Button";
 
@@ -40,7 +40,7 @@ const TodoListTitle = (props: Props) => {
               //   }}}
                 ></input>
             :<h1 className={props.h1TextStyling}>{props.todoListDict.title}</h1>}
-            <span className='text-black dark:text-white bg-gray-200 dark:bg-slate-600 w-6 h-6 rounded-full flex justify-center items-center'>{props.data?.filter((item) => item.type === props.todoListDict.title).length}</span>
+            <span className='text-black dark:text-white bg-gray-200 dark:bg-slate-600 w-6 h-6 rounded-full flex justify-center items-center'>{props.data?.filter((item) => item.type === props.todoListDict._id).length}</span>
         </div>
 
         <div className="flex flex-row gap-2">
