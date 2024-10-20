@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import TodoBoard from '../Todo-Board';
-import type { TodoType } from './types';
+import type { TodoType, TodoTypeType } from './types';
 
 function TodoComponent() {
   const [data, setData] = useState<TodoType[] | null>(null);
-  const [todoLists, setTodoLists] = useState<{_id: string, title: string}[]>([]);
+  const [todoLists, setTodoLists] = useState<TodoTypeType[]>([]);
   const [isTitleUpdating, setIsTitleUpdating] = useState<boolean>(false);
   const [isDataUpdating, setIsDataUpdating] = useState<boolean>(false);
   

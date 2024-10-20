@@ -10,20 +10,20 @@ import TodoListTitle from "../Todo-List-Title"
 // import { DropTargetRecord } from "@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types";
 // import { flushSync } from "react-dom";
 // import { reorderWithEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge';
-import { TodoType } from "../../Todo-Component/types";
+import { TodoType, TodoTypeType } from "../../Todo-Component/types";
 
 type Props = {
-    todoListDict: {_id: string, title: string},
+    todoListDict: TodoTypeType,
     data: TodoType[] | null,
     h1TextStyling: string,
     h3TextStyling: string,
     h4TextStyling: string,
-    todoLists: {_id: string, title: string}[],
+    todoLists: TodoTypeType[],
     setData: (data: TodoType[] | null) => void,
     addNewTodo: (id: string, title: string) => void,
     deleteTodoItem: (id: string) => void,
     deleteTodoItemList: (title: string) => void,
-    setTodoLists: (todoLists: {_id: string, title: string}[]) => void,
+    setTodoLists: (todoLists: TodoTypeType[]) => void,
     isTitleUpdating: boolean,
     setIsTitleUpdating: (isTitleUpdating: boolean) => void,
     index: number,

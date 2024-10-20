@@ -1,4 +1,4 @@
-import { TodoType } from "../Todo-Component/types";
+import { TodoType, TodoTypeType } from "../Todo-Component/types";
 import AddNewTodoList from "./Add-New-Todo-List"
 import TodoList from "./Todo-List"
 
@@ -13,7 +13,7 @@ type Props = {
     deleteTodoItem: (id: string) => void,
     addNewTodoList: () => void,
     deleteTodoItemList: (title: string) => void,
-    setTodoLists: (todoLists: {_id: string, title: string}[]) => void,
+    setTodoLists: (todoLists: TodoTypeType[]) => void,
     isTitleUpdating: boolean,
     setIsTitleUpdating: (isTitleUpdating: boolean) => void,
 }

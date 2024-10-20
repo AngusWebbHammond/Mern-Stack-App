@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { TodoType } from "../../Todo-Component/types";
+import { TodoType, TodoTypeType } from "../../Todo-Component/types";
 import DeleteButton from "../Delete-Button";
 import EditButton from "../Edit-Button";
 
 type Props = {
-    todoListDict: {_id: string, title: string},
+    todoListDict: TodoTypeType,
     data: TodoType[] | null,
     h1TextStyling: string,
     deleteTodoItemList: (title: string) => void,
-    todoLists: {_id: string, title: string}[],
-    setTodoLists: (todoLists: {_id: string, title: string}[]) => void,
+    todoLists: TodoTypeType[],
+    setTodoLists: (todoLists: TodoTypeType[]) => void,
     index: number,
     isTitleUpdating: boolean,
     setIsTitleUpdating: (isTitleUpdating: boolean) => void,

@@ -1,9 +1,10 @@
 import { PlusCircle } from "lucide-react"
+import { TodoTypeType } from "../../Todo-Component/types"
 
 type Props = {
     h3TextStyling: string,
     addNewTodoList: () => void,
-    todoLists: {_id: string, title: string}[],
+    todoLists: TodoTypeType[],
 }
 
 const AddNewTodoList = (props: Props) => {
