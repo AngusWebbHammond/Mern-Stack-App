@@ -6,7 +6,7 @@ type Props = {
     h1TextStyling: string,
     h3TextStyling: string,
     h4TextStyling: string,
-    todoLists: {_id: string, title: string}[],
+    todoLists: TodoTypeType[],
     data: TodoType[] | null,
     setData: (data: TodoType[] | null) => void,
     addNewTodo: (id: string, title: string) => void,

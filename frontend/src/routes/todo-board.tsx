@@ -74,7 +74,7 @@ function TodoComponent(props: Props) {
 
   
   return (
-    <div className='flex flex-row gap-2 justify-center items-center h-screen bg-white dark:bg-slate-900'>
+    <div className='flex flex-row gap-2 justify-center items-start h-screen bg-white dark:bg-slate-900'>
       {props.type === "Board"?
       <TodoBoard 
         setTodoLists={setTodoLists} 
@@ -89,8 +89,12 @@ function TodoComponent(props: Props) {
         addNewTodoList={addNewTodoList} 
         deleteTodoItemList={deleteTodoItemList} 
         isTitleUpdating={isTitleUpdating} 
-        setIsTitleUpdating={setIsTitleUpdating}/>:
-      <TodoBoardList/>
+        setIsTitleUpdating={setIsTitleUpdating}
+      />:
+      <TodoBoardList 
+        data={data}
+        todoLists={todoLists}
+      />
       }
     </div>
     
