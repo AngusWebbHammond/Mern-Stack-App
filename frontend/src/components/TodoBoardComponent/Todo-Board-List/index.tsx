@@ -40,33 +40,35 @@ const TodoBoardList = (props: Props) => {
   
 
   return (
-    <div className="p-40">
-      <table className="dark:text-gray-400">
-        <thead>
-          <tr className="flex flex-row dark:text-gray-300 border-b-2 border-t-2">
-            <th className={`font-bold text-3xl w-[${widths[0]}] text-left border-r-2 border-l-2 border-solid px-2`}>Title</th>
-            <th className={`font-bold text-3xl w-[${widths[1]}] xl:w-[800px] 2xl:w-[1200px] text-left border-r-2 border-solid px-2`}>Description</th>
-            <th className={`flex font-bold text-3xl w-[${widths[2]}] justify-center text-left border-r-2 border-solid px-2`}>Type</th>
-            <th className={`flex font-bold text-3xl w-[${widths[3]}] justify-center text-left border-r-2 border-solid px-2`}>Priority</th>
-            <th className={`flex font-bold text-3xl w-[${widths[4]}] justify-center text-left border-r-2 border-solid px-2`}>Deadline</th>
-          </tr>
-        </thead>
-        <tbody className="border-b-2">
-          {dataWithTypes?.map((item) => 
-            <tr key={item._id} className="flex flex-row">
-              <td className={`flex w-[${widths[0]}] text-left border-r-2 border-b-2 border-b-slate-300 border-opacity-30 border-l-2 border-solid p-2 items-center font-bold`}>{item.title}</td>
-              <td className={`flex w-[${widths[1]}] xl:w-[800px] 2xl:w-[1200px] text-left border-r-2 border-b-2 border-b-slate-300 border-opacity-30 border-solid p-2 items-center`}>{item.description}</td>
-              <td className={`flex w-[${widths[2]}] justify-center text-left border-r-2 border-b-2 border-b-slate-300 border-opacity-30 border-solid p-2 items-center`}>{item.type}</td>
-              <td className={`flex w-[${widths[3]}] justify-center text-left border-r-2 border-b-2 border-b-slate-300 border-opacity-30 border-solid p-2 items-center ${
-                item.priority === "Low"? `text-green-500`: 
-                item.priority === "Medium"? `text-yellow-500`:
-                `text-red-500`
-                }`}>{item.priority}</td>
-              <td className={`flex w-[${widths[4]}] justify-center text-left border-r-2 border-b-2 border-b-slate-300 border-opacity-30 border-solid p-2 items-center`}>{item.deadline.slice(0,10)}</td>
+    <div className="p-40 h-full">
+      <div className="flex flex-col overflow-auto h-full" >
+        <table className="dark:text-gray-400">
+          <thead>
+            <tr className="flex flex-row dark:text-gray-300 border-b-2 border-t-2">
+              <th className={`font-bold text-3xl w-[${widths[0]}] text-left border-r-2 border-l-2 border-solid px-2`}>Title</th>
+              <th className={`font-bold text-3xl w-[${widths[1]}] xl:w-[800px] 2xl:w-[1200px] text-left border-r-2 border-solid px-2`}>Description</th>
+              <th className={`flex font-bold text-3xl w-[${widths[2]}] justify-center text-left border-r-2 border-solid px-2`}>Type</th>
+              <th className={`flex font-bold text-3xl w-[${widths[3]}] justify-center text-left border-r-2 border-solid px-2`}>Priority</th>
+              <th className={`flex font-bold text-3xl w-[${widths[4]}] justify-center text-left border-r-2 border-solid px-2`}>Deadline</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="border-b-2">
+              {dataWithTypes?.map((item) => 
+                <tr key={item._id} className="flex flex-row">
+                  <td className={`flex w-[${widths[0]}] text-left border-r-2 border-b-2 border-b-slate-300 border-opacity-30 border-l-2 border-solid p-2 items-center font-bold`}>{item.title}</td>
+                  <td className={`flex w-[${widths[1]}] xl:w-[800px] 2xl:w-[1200px] text-left border-r-2 border-b-2 border-b-slate-300 border-opacity-30 border-solid p-2 items-center`}>{item.description}</td>
+                  <td className={`flex w-[${widths[2]}] justify-center text-left border-r-2 border-b-2 border-b-slate-300 border-opacity-30 border-solid p-2 items-center`}>{item.type}</td>
+                  <td className={`flex w-[${widths[3]}] justify-center text-left border-r-2 border-b-2 border-b-slate-300 border-opacity-30 border-solid p-2 items-center ${
+                    item.priority === "Low"? `text-green-500`: 
+                    item.priority === "Medium"? `text-yellow-500`:
+                    `text-red-500`
+                    }`}>{item.priority}</td>
+                  <td className={`flex w-[${widths[4]}] justify-center text-left border-r-2 border-b-2 border-b-slate-300 border-opacity-30 border-solid p-2 items-center`}>{item.deadline.slice(0,10)}</td>
+                </tr>
+              )}  
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
