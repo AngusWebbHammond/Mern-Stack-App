@@ -20,7 +20,7 @@ type Props = {
 
 const TodoBoard = (props: Props) => {
   return (
-    <div className='flex flex-row overflow-auto gap-3'>
+    <div className='flex flex-row overflow-x-auto h-[80%] gap-3'>
         {props.todoLists.map((todoListDictItem, index: number) => 
             <TodoList 
               index={index} 

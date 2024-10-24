@@ -13,7 +13,9 @@ const Sidebar = () => {
           </li>
         </ul>
       </nav>
-      <Outlet/>
+      <div className="w-5/6 xl:w-[92%]">
+        <Outlet/>
+      </div>
     </div>
   )
 }

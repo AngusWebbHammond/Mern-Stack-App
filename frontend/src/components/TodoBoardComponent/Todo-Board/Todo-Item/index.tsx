@@ -27,7 +27,7 @@ const TodoItem = (props: Props) => {
   return (
     <>
       <div 
-        className={`bg-gray-300 dark:bg-slate-600 relative rounded-md gap-2 flex justify-between pl-3 pr-4 min-h-[5rem] ring-2 ring-slate-700 py-3`}>
+        className={`bg-gray-300 dark:bg-slate-600 rounded-md gap-2 flex justify-between pl-3 pr-4 ring-2 ring-slate-700 py-3`}>
           <div className='flex flex-col w-60 justify-center'>
               {isEditing?<input 
                 className={props.h3TextStyling+' bg-gray-500 w-60'} 

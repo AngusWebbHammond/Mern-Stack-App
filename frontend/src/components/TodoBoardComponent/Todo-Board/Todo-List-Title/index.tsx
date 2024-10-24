@@ -32,7 +32,7 @@ const TodoListTitle = (props: Props) => {
               type='text' 
               autoFocus 
               value={tempTitle} 
-              onChange={(e) => setTempTitle(e.currentTarget.value)} 
+              onChange={(e) => setTempTitle(e.currentTarget.value)}
               onKeyUp={(e) => {
                 if (e.code === "Enter") {
                   const newValue = e.currentTarget.value;

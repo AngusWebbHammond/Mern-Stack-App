@@ -74,7 +74,7 @@ function TodoComponent(props: Props) {
 
   
   return (
-    <div className={`flex flex-row gap-2 justify-center w-5/6 xl:w-[92%] px-20 ${props.type === "Board" ? `items-center`: `items-start`} bg-white dark:bg-slate-900`}>
+    <div className={`flex flex-row gap-2 justify-center h-full px-20 ${props.type === "Board" ? `items-center`: `items-start`} bg-white dark:bg-slate-900`}>
       {props.type === "Board"?
       <TodoBoard 
         setTodoLists={setTodoLists} 
