@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 
-const TodoHome = () => {
+const Sidebar = () => {
   return (
-    <nav>
+    <div className="flex flex-row w-screen h-[92%]">
+      <nav className="flex w-1/6 xl:w-[8%] justify-center">
         <ul>
           <li>
             <Link to="/todo-boards/list">List of Todos</Link>
@@ -12,7 +13,9 @@ const TodoHome = () => {
           </li>
         </ul>
       </nav>
+      <Outlet/>
+    </div>
   )
 }
 
-export default TodoHome
+export default Sidebar

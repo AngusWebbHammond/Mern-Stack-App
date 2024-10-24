@@ -40,7 +40,7 @@ const TodoBoardList = (props: Props) => {
   
 
   return (
-    <div className="p-40 h-full">
+    <div className="h-full py-20">
       <div className="flex flex-col overflow-auto h-full" >
         <table className="dark:text-gray-400">
           <thead>
