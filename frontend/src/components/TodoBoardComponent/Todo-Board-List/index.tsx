@@ -7,7 +7,7 @@ type Props = {
 }
 
 const TodoBoardList = (props: Props) => {
-  const widths = ['100px', '300px', '120px', '130px', '150px'];
+  const [widths, setWidths] = useState<string[]>(['100px', '300px', '120px', '130px', '150px']);
   const [dataWithTypes, setDataWithTypes] = useState<TodoType[] | null>(null);
 
   useEffect(() => {
@@ -45,16 +45,16 @@ const TodoBoardList = (props: Props) => {
         <table className="dark:text-gray-400">
           <thead>
             <tr className="flex flex-row dark:text-gray-300 border-b-2 border-t-2">
-              <th className={`font-bold text-3xl w-[${widths[0]}] text-left border-r-2 border-l-2 border-solid px-2`}>Title</th>
-              <th className={`font-bold text-3xl w-[${widths[1]}] xl:w-[800px] 2xl:w-[1200px] text-left border-r-2 border-solid px-2`}>Description</th>
-              <th className={`flex font-bold text-3xl w-[${widths[2]}] justify-center text-left border-r-2 border-solid px-2`}>Type</th>
-              <th className={`flex font-bold text-3xl w-[${widths[3]}] justify-center text-left border-r-2 border-solid px-2`}>Priority</th>
-              <th className={`flex font-bold text-3xl w-[${widths[4]}] justify-center text-left border-r-2 border-solid px-2`}>Deadline</th>
+              <th className={`font-bold text-3xl w-[100px] text-left border-r-2 border-l-2 border-solid px-2`}>Title</th>
+              <th className={`font-bold text-3xl w-[300px] xl:w-[800px] 2xl:w-[1200px] text-left border-r-2 border-solid px-2`}>Description</th>
+              <th className={`flex font-bold text-3xl w-[120px] justify-center text-left border-r-2 border-solid px-2`}>Type</th>
+              <th className={`flex font-bold text-3xl w-[130px] justify-center text-left border-r-2 border-solid px-2`}>Priority</th>
+              <th className={`flex font-bold text-3xl w-[150px] justify-center text-left border-r-2 border-solid px-2`}>Deadline</th>
             </tr>
           </thead>
           <tbody className="border-b-2">
               {dataWithTypes?.map((item) => 
-                <tr key={item._id} className="flex flex-row">
+                <tr key={item._id} className="flex">
                   <td className={`flex w-[${widths[0]}] text-left border-r-2 border-b-2 border-b-slate-300 border-opacity-30 border-l-2 border-solid p-2 items-center font-bold`}>{item.title}</td>
                   <td className={`flex w-[${widths[1]}] xl:w-[800px] 2xl:w-[1200px] text-left border-r-2 border-b-2 border-b-slate-300 border-opacity-30 border-solid p-2 items-center`}>{item.description}</td>
                   <td className={`flex w-[${widths[2]}] justify-center text-left border-r-2 border-b-2 border-b-slate-300 border-opacity-30 border-solid p-2 items-center`}>{item.type}</td>

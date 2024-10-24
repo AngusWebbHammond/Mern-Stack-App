@@ -14,6 +14,7 @@ router.post('/todo/create', async (req, res) => {
         todoTypeController.createTodoType(req, res);
       }
       res.send("Successfully added to DB").status(200);
+      return;
     } catch (error) {
       res.status(500).json({ error: 'An error occured while adding to DB'})
       console.log("An error occured while adding to DB")
