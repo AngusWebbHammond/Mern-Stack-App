@@ -7,12 +7,15 @@ const Sidebar = () => {
       <nav className="flex flex-col w-1/6 xl:w-[8%] py-12 border-r-2 border-slate-500 justify-between items-center">
         <div>
           <h1 className="dark:text-white font-bold text-2xl">Naviagtion</h1>
-          <ul className="flex flex-col gap-3 w-fit">
+          <ul className="flex flex-col gap-3">
             <li>
               <SidebarLink to="/todo-boards/list" title="List of Todos"/>
             </li>
             <li>
               <SidebarLink to="/todo-boards/board" title="Todo Boards"/>
+            </li>
+            <li>
+              <SidebarLink to="/todo-boards/calendar" title="Calendar"/>
             </li>
           </ul>
         </div>
