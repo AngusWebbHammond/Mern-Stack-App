@@ -1,22 +1,25 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import NavbarLink from "../components/NavbarLink";
 
 const Navbar = () => {
   return (
-    <div className="flex flex-col h-screen">
-      <nav className="flex h-[8%] items-center p-5">
-        <div className="w-20">
-          {/* Image Goes Here */}
+    <div className="flex flex-col h-screen dark:bg-slate-800">
+      <nav className="flex h-[8%] items-center  border-b-2 border-slate-500 gap-3">
+        <div className="flex h-full w-1/6 xl:w-[8%] text-white font-bold text-3xl border-r-2 border-slate-500 justify-center items-center">
+          Todos
         </div>
-        <ul className="flex flex-row gap-2 ">
+        <ul className="flex flex-row gap-2">
           <li>
-            <Link to="/">Home</Link>
+            <NavbarLink to="/" title="Home"/>
           </li>
           <li>
-            <Link to="/todo-boards">Todo Board Types</Link>
+            <NavbarLink to="/todo-boards" title="Todo Board Types"/>
           </li>
         </ul>
       </nav>
-      <Outlet />
+      <div className="dark:bg-slate-900 h-[92%]">
+        <Outlet />
+      </div>
     </div>
   )
 };
