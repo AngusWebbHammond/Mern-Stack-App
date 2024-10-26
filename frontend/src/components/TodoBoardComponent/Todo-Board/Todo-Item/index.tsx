@@ -44,6 +44,7 @@ const TodoItem = (props: Props) => {
       setIsEditing(false);
       props.setIsTitleUpdating(!props.isTitleUpdating);
     })
+    console.log(todoData.description)
   }
 
   return (
@@ -52,22 +53,24 @@ const TodoItem = (props: Props) => {
         className={`bg-gray-300 dark:bg-slate-600 rounded-md gap-2 flex justify-between pl-3 pr-4 ring-2 ring-slate-700 py-3`}>
           <div className='flex flex-col w-60 justify-center gap-2'>
               {isEditing?<input 
-                className={props.h3TextStyling+' bg-gray-500 w-60'} 
+                className={props.h3TextStyling+' bg-gray-500 w-60 px-2'} 
                 type='text' 
                 autoFocus 
                 value={tempTitle} 
                 onChange={(e) => setTempTitle(e.currentTarget.value)}
                 />
               :<h3 className={props.h3TextStyling}>{props.todoItemDict.title}</h3>}
+
               {isEditing?<textarea 
-                className={'text-gray-700 dark:text-gray-300 font-normal text-sm bg-gray-500 w-60 min-h-24'} 
+                className={'text-gray-700 dark:text-gray-300 font-normal text-sm bg-gray-500 w-60 min-h-24 px-2'} 
                 autoFocus
                 value={tempDescription}
                 onChange={(e) => {
                   setTempDescription(e.currentTarget.value)
                 }}
                 />
-              :<h4 className={props.h4TextStyling}>{props.todoItemDict.description}</h4>}
+              :<p className={props.h4TextStyling}>{props.todoItemDict.description}</p>}
+
               {isEditing?
               <div className="flex flex-row text-gray-700 dark:text-gray-300 gap-1">
                 <h5>Deadline:</h5>
@@ -75,14 +78,14 @@ const TodoItem = (props: Props) => {
                 selected={tempDeadline} 
                 onChange={(date) => setTempDeadline(date)}
                 withPortal
-                customInput={<button className="text-gray-700 dark:text-gray-300 font-normal text-sm bg-gray-500">{tempDeadline?.toLocaleDateString()}</button>}/>
+                customInput={<button className="text-gray-700 dark:text-gray-300 font-normal text-sm px-2 bg-gray-500">{tempDeadline?.toLocaleDateString()}</button>}/>
               </div>
               :<h3 className={props.h4TextStyling}>{deadline.toLocaleDateString()}</h3>}
 
               {isEditing?
               <div className="flex flex-row text-gray-700 dark:text-gray-300 gap-1">
                 <h5>Priority:</h5>
-                <select className={`dark:bg-gray-500 
+                <select className={`flex dark:bg-gray-500 rounded-md items-center justify-center
                 ${tempPriority === "Low"?
                 `dark:bg-green-600`:
                 tempPriority === "Medium"?
@@ -97,7 +100,7 @@ const TodoItem = (props: Props) => {
               
               {isEditing?
               <div className="flex flex-row gap-2">
-                <button className="bg-slate-500 px-1 m-0 text-gray-700 dark:text-gray-200 font-semibold rounded-full"
+                <button className="bg-slate-500 px-2 m-0 text-gray-700 dark:text-gray-200 font-semibold rounded-full hover:dark:bg-slate-400"
                 onClick={() => {
                   setIsEditing(false);
                   setTempDeadline(deadline)
@@ -105,14 +108,14 @@ const TodoItem = (props: Props) => {
                   setTempPriority(props.todoItemDict.priority)
                   setTempTitle(props.todoItemDict.title)
                 }}>Cancel</button>
-                <button className="bg-slate-500 px-1 m-0 text-gray-700 dark:text-gray-200 font-semibold rounded-full"
+
+                <button className="bg-slate-500 px-2 m-0 text-gray-700 dark:text-gray-200 font-semibold rounded-full hover:dark:bg-slate-400"
                 onClick={() => {
                   const tempItemData = props.todoItemDict;
                   tempItemData.title = tempTitle;
                   tempItemData.description = tempDescription;
                   tempItemData.deadline = tempDeadline?.toDateString() as string;
                   tempItemData.priority = tempPriority;
-                  console.log(tempPriority)
                   updateTitle(tempItemData);
                 }}>Submit</button>
               </div>
