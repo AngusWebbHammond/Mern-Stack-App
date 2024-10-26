@@ -20,7 +20,16 @@ const TodoListTitle = (props: Props) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [tempTitle, setTempTitle] = useState<string>(props.todoListDict.title);
 
-  const updateTitle = (newTitle: string, index: number, oldTitle: string): void => {
+  const updateTitle = (id: string, newValue: string): void => {
+    fetch(`http://localhost:5050/api/todo/list/update?id=${id}&title=${newValue}`, {method: 'PUT'})
+    .then((res) => {
+      return res.json()
+    })
+    .then((resData) => {
+      console.log(resData);
+      setIsEditing(false);
+      props.setIsTitleUpdating(!props.isTitleUpdating);
+    })
   }
 
   return (
@@ -36,7 +45,7 @@ const TodoListTitle = (props: Props) => {
               onKeyUp={(e) => {
                 if (e.code === "Enter") {
                   const newValue = e.currentTarget.value;
-                  updateTitle(newValue, props.index, props.todoListDict.title);
+                  updateTitle(props.todoLists[props.index]._id, newValue);
                 }}}
                 ></input>
             :<h1 className={props.h1TextStyling}>{props.todoListDict.title}</h1>}

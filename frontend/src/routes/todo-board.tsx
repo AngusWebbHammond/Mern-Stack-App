@@ -29,7 +29,7 @@ function TodoComponent(props: Props) {
     .then((resData) => {
       setTodoLists(resData)
     })
-  }, [isDataUpdating])
+  }, [isDataUpdating, isTitleUpdating])
 
   const h1TextStyling: string = 'text-black dark:text-white font-medium text-2xl flex justify-left';
   const h3TextStyling: string = 'text-gray-800 dark:text-gray-100 font-bold text-md flex justify-left items-center';

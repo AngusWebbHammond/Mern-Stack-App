@@ -22,6 +22,7 @@ router.post('/todo/create', async (req, res) => {
 });
 router.delete('/todo/delete', todoController.deleteTodo);
 router.post('/todo/list/create', todoTypeController.createTodoType);
-router.delete('/todo/list/delete', todoTypeController.deleteTodoType)
+router.delete('/todo/list/delete', todoTypeController.deleteTodoType);
+router.put('/todo/list/update', todoTypeController.updateTitle)
 
 module.exports = router;

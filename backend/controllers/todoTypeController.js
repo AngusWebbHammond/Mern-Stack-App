@@ -42,3 +42,13 @@ exports.deleteTodoType = async (req, res) => {
         res.status(500).json({ error: 'An error occured while deleting todo type'});
     }
 }
+
+exports.updateTitle = async (req, res) => {
+    try {
+        const id = req.query.id;
+        const result = await TodoTypes.findByIdAndUpdate(id, {title: req.query.title});
+        res.send(result);
+    } catch (error) {
+        res.status(500).json({ error: 'An error occured while updating todo type'});
+    }
+}
