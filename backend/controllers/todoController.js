@@ -36,3 +36,19 @@ exports.deleteTodo = async (req, res) => {
         res.status(500).json({ error: 'An error occured while deleting a todo'})
     }
 }
+
+exports.updateTodo = async (req, res) => {
+    try {
+        const id = req.query.id;
+        const deadline = new Date(req.query.deadline);
+        const result = await Todo.findByIdAndUpdate(id, {
+            title: req.query.title, 
+            type: req.query.typeID,
+            description: req.query.description,
+            priority: req.query.priority,
+            deadline: deadline});
+        res.send(result);
+    } catch (error) {
+        res.status(500).json({ error: 'An error occured while updating todo'});
+    }
+}

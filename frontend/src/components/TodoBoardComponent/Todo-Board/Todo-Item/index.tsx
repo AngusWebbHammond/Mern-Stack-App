@@ -21,7 +21,17 @@ const TodoItem = (props: Props) => {
   const [tempTitle, setTempTitle] = useState<string>(props.todoItemDict.title);
   const [tempDescription, setTempDescription] = useState<string>(props.todoItemDict.description);
 
-  const updateTitle = (newTitle: string, newDescription: string, index: number) => {
+  const updateTitle = (todoData: TodoType) => {
+
+    fetch(`http://localhost:5050/api/todo/update?id=${todoData._id}&title=${todoData.title}&type=${todoData.type}&description=${todoData.description}&priority=${todoData.priority}&deadline=${todoData.deadline}`, {method: 'PUT'})
+    .then((res) => {
+      return res.json()
+    })
+    .then((resData) => {
+      console.log(resData);
+      setIsEditing(false);
+      props.setIsTitleUpdating(!props.isTitleUpdating);
+    })
   }
 
   return (
@@ -37,10 +47,12 @@ const TodoItem = (props: Props) => {
                 onChange={(e) => setTempTitle(e.currentTarget.value)} 
                 onKeyUp={(e) => {
                   if (e.code === "Enter") {
-                    if (!props.index) return;
-                    updateTitle(tempTitle, tempDescription, props.index);
-                  }
-              }}></input>:<h3 className={props.h3TextStyling}>{props.todoItemDict.title}</h3>}
+                    const tempItemData = props.todoItemDict;
+                    tempItemData.title = tempTitle;
+                    tempItemData.description = tempDescription;
+                    updateTitle(tempItemData);
+                  }}}/>
+              :<h3 className={props.h3TextStyling}>{props.todoItemDict.title}</h3>}
               {isEditing?<textarea 
                 className={'text-gray-700 dark:text-gray-300 font-normal text-sm bg-gray-500 w-60 min-h-24'} 
                 autoFocus
@@ -48,10 +60,11 @@ const TodoItem = (props: Props) => {
                 onChange={(e) => setTempDescription(e.currentTarget.value)}
                 onKeyUp={(e) => {
                   if (e.code === "Enter") {
-                    if (!props.index) return;
-                    updateTitle(tempTitle, tempDescription, props.index);
-                  }}}
-              />
+                    const tempItemData = props.todoItemDict;
+                    tempItemData.title = tempTitle;
+                    tempItemData.description = tempDescription;
+                    updateTitle(tempItemData);
+                  }}}/>
               :<h4 className={props.h4TextStyling}>{props.todoItemDict.description}</h4>}
           </div>
           

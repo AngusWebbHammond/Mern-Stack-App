@@ -43,6 +43,7 @@ const TodoListTitle = (props: Props) => {
               value={tempTitle} 
               onChange={(e) => setTempTitle(e.currentTarget.value)}
               onKeyUp={(e) => {
+                console.log(e.code)
                 if (e.code === "Enter") {
                   const newValue = e.currentTarget.value;
                   updateTitle(props.todoLists[props.index]._id, newValue);
