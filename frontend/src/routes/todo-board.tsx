@@ -12,9 +12,15 @@ function TodoComponent(props: Props) {
   const [todoLists, setTodoLists] = useState<TodoTypeType[]>([]);
   const [isTitleUpdating, setIsTitleUpdating] = useState<boolean>(false);
   const [isDataUpdating, setIsDataUpdating] = useState<boolean>(false);
+
+  const BaseURL = new URL(import.meta.env.VITE_BACKEND_API_BASE_URL)
   
   useEffect(() => {
-    fetch('http://localhost:5050/api/todo/get/all', {method: 'GET'})
+
+    const getAllTodoURL = new URL("todo/get/all", BaseURL)
+    const getTodoTypesURL = new URL("todo/get/types", BaseURL)
+
+    fetch(getAllTodoURL, {method: 'GET'})
     .then((res) => {
       return res.json()
     })
@@ -22,7 +28,7 @@ function TodoComponent(props: Props) {
       setData(resData);
     })
 
-    fetch('http://localhost:5050/api/todo/get/types', {method: 'GET'})
+    fetch(getTodoTypesURL, {method: 'GET'})
     .then((res) => {
       return res.json()
     })
@@ -36,7 +42,10 @@ function TodoComponent(props: Props) {
   const h4TextStyling: string = 'text-gray-700 dark:text-gray-300 font-normal text-sm flex justify-left';
 
   function deleteTodoItem (id: string): void {
-    fetch(`http://localhost:5050/api/todo/delete?_id=${id}`, {method: 'DELETE'})
+    const deleteTodoURL = new URL("todo/delete", BaseURL)
+    deleteTodoURL.searchParams.append("_id", id)
+
+    fetch(deleteTodoURL, {method: 'DELETE'})
     .then((res) => {
       return res.json()
     })
@@ -47,7 +56,26 @@ function TodoComponent(props: Props) {
   }
 
   function addNewTodo (typeID: string, type: string): void {
-    fetch(`http://localhost:5050/api/todo/create?title=New Todo&type=${type}&priority=Low&description=New todo description&deadline=27 Oct 2024&typeID=${typeID}`, {method: 'POST'})
+    const addNewTodoURL = new URL("todo/create", BaseURL)
+
+    const deadline = new Date()
+
+    console.log(deadline.toDateString())
+
+    const searchParameters = {
+      title: "New Todo",
+      type: type,
+      description: "New Todo Description",
+      priority: "Low",
+      deadline: deadline.toDateString(),
+      typeID: typeID
+    }
+
+    for (const [key, value] of Object.entries(searchParameters)) {
+      addNewTodoURL.searchParams.append(key, value)
+    }
+    
+    fetch(addNewTodoURL, {method: 'POST'})
     .then(() => {
       setIsDataUpdating(!isDataUpdating);
       return;
@@ -55,14 +83,22 @@ function TodoComponent(props: Props) {
   }
 
   function addNewTodoList (): void {
-    fetch('http://localhost:5050/api/todo/list/create?type=New Todo List', {method: 'POST'})
+    const addNewTodoListURL = new URL("todo/list/create", BaseURL)
+
+    addNewTodoListURL.searchParams.append("type", "New Todo List")
+
+    fetch(addNewTodoListURL, {method: 'POST'})
     .then(() => {
       setIsDataUpdating(!isDataUpdating);
     })
   }
 
   function deleteTodoItemList (id: string): void {
-    fetch(`http://localhost:5050/api/todo/list/delete?id=${id}`, {method: 'DELETE'})
+    const deleteTodoItemListURL = new URL("todo/list/delete", BaseURL)
+
+    deleteTodoItemListURL.searchParams.append("id", id)
+
+    fetch(deleteTodoItemListURL, {method: 'DELETE'})
     .then((res) => {
       return res.json()
     })
@@ -74,7 +110,8 @@ function TodoComponent(props: Props) {
 
   
   return (
-    <div className={`flex flex-row gap-2 justify-center h-full px-20 ${props.type === "Board" ? `items-center`: `items-start`} bg-white dark:bg-slate-900`}>
+    <div className={`flex flex-row gap-2 justify-center h-full px-20 bg-white dark:bg-slate-900 
+    ${props.type === "Board" ? `items-center`: `items-start`}`}>
       {props.type === "Board"?
       <TodoBoard 
         setTodoLists={setTodoLists} 

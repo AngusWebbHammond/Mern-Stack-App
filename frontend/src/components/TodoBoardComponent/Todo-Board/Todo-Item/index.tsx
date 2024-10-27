@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from "react";
+import { useState } from "react";
 import { TodoType } from '../../../../types/todo-board-types';
 import DeleteButton from '../Delete-Button';
 import EditButton from '../Edit-Button';
@@ -27,6 +27,8 @@ type Props = {
 const TodoItem = (props: Props) => {  
   const deadline = new Date(props.todoItemDict.deadline);
 
+  const BaseURL = new URL(import.meta.env.VITE_BACKEND_API_BASE_URL)
+  
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [tempTitle, setTempTitle] = useState<string>(props.todoItemDict.title);
   const [tempDescription, setTempDescription] = useState<string>(props.todoItemDict.description);
@@ -35,7 +37,23 @@ const TodoItem = (props: Props) => {
 
   const updateTitle = (todoData: TodoType) => {
 
-    fetch(`http://localhost:5050/api/todo/update?id=${todoData._id}&title=${todoData.title}&type=${todoData.type}&description=${todoData.description}&priority=${todoData.priority}&deadline=${todoData.deadline}`, {method: 'PUT'})
+    const searchParameters = {
+      id: todoData._id,
+      title: todoData.title,
+      type: todoData.type,
+      description: todoData.description,
+      deadline: todoData.deadline,
+      priority: todoData.priority
+    }
+
+    const updateURL = new URL("todo/update", BaseURL)
+
+    for (const [key, value] of Object.entries(searchParameters)) {
+      updateURL.searchParams.append(key, value)
+    }
+    
+    console.log(updateURL.href)
+    fetch(updateURL, {method: 'PUT'})
     .then((res) => {
       return res.json()
     })
@@ -44,7 +62,6 @@ const TodoItem = (props: Props) => {
       setIsEditing(false);
       props.setIsTitleUpdating(!props.isTitleUpdating);
     })
-    console.log(todoData.description)
   }
 
   return (
