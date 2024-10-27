@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import TodoBoard from '../components/TodoBoardComponent/Todo-Board';
+import TodoBoard from '../components/Todo-Board';
 import type { TodoType, TodoTypeType } from '../types/todo-board-types';
-import TodoBoardList from '../components/TodoBoardComponent/Todo-Board-List';
+import TodoBoardList from '../components/Todo-Board-List';
 
 type Props = {
   type: string;
@@ -16,25 +16,8 @@ function TodoComponent(props: Props) {
   const BaseURL = new URL(import.meta.env.VITE_BACKEND_API_BASE_URL)
   
   useEffect(() => {
-
-    const getAllTodoURL = new URL("todo/get/all", BaseURL)
-    const getTodoTypesURL = new URL("todo/get/types", BaseURL)
-
-    fetch(getAllTodoURL, {method: 'GET'})
-    .then((res) => {
-      return res.json()
-    })
-    .then((resData) => {
-      setData(resData);
-    })
-
-    fetch(getTodoTypesURL, {method: 'GET'})
-    .then((res) => {
-      return res.json()
-    })
-    .then((resData) => {
-      setTodoLists(resData)
-    })
+    getAllTodo()
+    getAllTodoType()
   }, [isDataUpdating, isTitleUpdating])
 
   const h1TextStyling: string = 'text-black dark:text-white font-medium text-2xl flex justify-left';
@@ -52,6 +35,30 @@ function TodoComponent(props: Props) {
     .then((resData) => {
       setIsDataUpdating(!isDataUpdating);
       console.log(resData);
+    })
+  }
+
+  function getAllTodo (): void {
+    const getAllTodoURL = new URL("todo/get/all", BaseURL)
+
+    fetch(getAllTodoURL, {method: 'GET'})
+    .then((res) => {
+      return res.json()
+    })
+    .then((resData) => {
+      setData(resData);
+    })
+  }
+
+  function getAllTodoType (): void {
+    const getTodoTypesURL = new URL("todo/get/types", BaseURL)
+
+    fetch(getTodoTypesURL, {method: 'GET'})
+    .then((res) => {
+      return res.json()
+    })
+    .then((resData) => {
+      setTodoLists(resData)
     })
   }
 

@@ -1,5 +1,5 @@
 import { PlusCircle } from "lucide-react"
-import { TodoTypeType } from "../../../../types/todo-board-types"
+import { TodoTypeType } from "../../types/todo-board-types"
 
 type Props = {
     h3TextStyling: string,

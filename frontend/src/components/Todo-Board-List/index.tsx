@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TodoType, TodoTypeType } from "../../../types/todo-board-types"
+import { TodoType, TodoTypeType } from "../../types/todo-board-types"
 
 type Props = {
   data: TodoType[] | null,

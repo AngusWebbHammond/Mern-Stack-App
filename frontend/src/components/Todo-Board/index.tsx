@@ -1,6 +1,6 @@
-import { TodoType, TodoTypeType } from "../../../types/todo-board-types";
-import AddNewTodoList from "./Add-New-Todo-List"
-import TodoList from "./Todo-List"
+import { TodoType, TodoTypeType } from "../../types/todo-board-types";
+import AddNewTodoList from "../Add-New-Todo-List"
+import TodoList from "../Todo-List"
 
 type Props = {
     h1TextStyling: string,

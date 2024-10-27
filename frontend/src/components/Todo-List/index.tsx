@@ -1,7 +1,7 @@
 import AddNewTodo from "../Add-New-Todo"
 import TodoItem from "../Todo-Item"
 import TodoListTitle from "../Todo-List-Title"
-import { TodoType, TodoTypeType } from "../../../../types/todo-board-types";
+import { TodoType, TodoTypeType } from "../../types/todo-board-types";
 
 type Props = {
     todoListDict: TodoTypeType,

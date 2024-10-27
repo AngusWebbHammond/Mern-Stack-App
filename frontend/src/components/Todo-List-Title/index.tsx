@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TodoType, TodoTypeType } from "../../../../types/todo-board-types";
+import { TodoType, TodoTypeType } from "../../types/todo-board-types";
 import DeleteButton from "../Delete-Button";
 import EditButton from "../Edit-Button";
 

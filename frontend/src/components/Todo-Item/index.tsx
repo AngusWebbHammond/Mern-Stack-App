@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TodoType } from '../../../../types/todo-board-types';
+import { TodoType } from '../../types/todo-board-types';
 import DeleteButton from '../Delete-Button';
 import EditButton from '../Edit-Button';
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
