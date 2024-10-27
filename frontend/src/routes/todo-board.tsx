@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import TodoBoard from '../components/Todo-Board';
 import type { TodoType, TodoTypeType } from '../types/todo-board-types';
 import TodoBoardList from '../components/Todo-Board-List';
+import CalendarComponent from '../components/Calendar';
 
 type Props = {
   type: string;
@@ -135,9 +136,13 @@ function TodoComponent(props: Props) {
         isTitleUpdating={isTitleUpdating} 
         setIsTitleUpdating={setIsTitleUpdating}
       />:
+      props.type === "List"?
       <TodoBoardList 
         data={data}
         todoLists={todoLists}
+      />:
+      <CalendarComponent
+        data={data}
       />
       }
     </div>

@@ -22,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route index element={<></>}/>
             <Route path="list" element={<TodoComponent type="List"/>}/>
             <Route path="board" element={<TodoComponent type="Board"/>}/>
+            <Route path="calendar" element={<TodoComponent type="Calendar"/>}/>
             <Route path="*" element={<ErrorPage/>}/>
           </Route>
           <Route path="*" element={<ErrorPage/>}/>
