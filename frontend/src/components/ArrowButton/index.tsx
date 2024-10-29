@@ -7,8 +7,9 @@ type Props = {
 }
 
 const ArrowButton = (props: Props) => {
+    const disabled = (props.type === "Left" && props.index === 0) || (props.type === "Right" && props.index === 2)
   return (
-    <button disabled={(props.type === "Left" && props.index === 0) || (props.type === "Right" && props.index === 2)} onClick={() => {
+    <button className={`${disabled?`opacity-50`:``}`} disabled={disabled} onClick={() => {
         if (props.type === "Left") {
             props.setIndex(props.index - 1)
         }
