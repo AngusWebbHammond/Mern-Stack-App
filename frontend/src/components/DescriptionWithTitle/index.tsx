@@ -4,7 +4,7 @@ type Props = {
     imageLeft: boolean
 }
 
-const Description = (props: Props) => {
+const DescriptionWithTitle = (props: Props) => {
   return (
     <div className={`flex flex-col gap-2 w-full ${props.imageLeft?``:`text-right`}`}>
         <h3 className="font-semibold text-2xl">{props.title}</h3>
@@ -13,4 +13,4 @@ const Description = (props: Props) => {
 )
 }
 
-export default Description
+export default DescriptionWithTitle
