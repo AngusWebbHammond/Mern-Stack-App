@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
-import NavbarLink from "../components/NavbarLink";
+import NaviationLink from "../components/SidebarLink";
+
 
 const Navbar = () => {
   return (
@@ -10,10 +11,10 @@ const Navbar = () => {
         </div>
         <ul className="flex flex-row gap-2">
           <li>
-            <NavbarLink to="/" title="Home"/>
+            <NaviationLink to="/" title="Home" type=""/>
           </li>
           <li>
-            <NavbarLink to="/todo-boards" title="Todo Board Types"/>
+            <NaviationLink to="/todo-boards" title="Todo Board Types" type=""/>
           </li>
         </ul>
       </nav>

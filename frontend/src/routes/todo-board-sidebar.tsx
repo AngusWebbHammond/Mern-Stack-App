@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom"
-import SidebarLink from "../components/SidebarLink"
 import SortingRadio from "../components/SortingRadio"
+import NaviationLink from "../components/SidebarLink"
 
 const Sidebar = () => {
   const location = useLocation()
@@ -12,13 +12,13 @@ const Sidebar = () => {
           <h1 className="dark:text-white font-bold text-2xl">Navigation</h1>
           <ul className="flex flex-col gap-3">
             <li>
-              <SidebarLink to="/todo-boards/list" title="List of Todos"/>
+              <NaviationLink to="/todo-boards/list" title="List of Todos" type="Sidebar"/>
             </li>
             <li>
-              <SidebarLink to="/todo-boards/board" title="Todo Boards"/>
+              <NaviationLink to="/todo-boards/board" title="Todo Boards" type="Sidebar"/>
             </li>
             <li>
-              <SidebarLink to="/todo-boards/calendar" title="Calendar"/>
+              <NaviationLink to="/todo-boards/calendar" title="Calendar" type="Sidebar"/>
             </li>
           </ul>
         </div>
