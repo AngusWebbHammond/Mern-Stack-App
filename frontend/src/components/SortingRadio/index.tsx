@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux"
+import { change } from "../../features/sortingType/sortingTypeSlice"
+
 type Props = {
     title: string,
     inputName: string,
@@ -5,9 +8,11 @@ type Props = {
 }
 
 const SortingRadio = (props: Props) => {
+  const dispatch = useDispatch()
+
   return (
     <div className="flex flex-row gap-2">
-        <input id={props.title} type="radio" name={props.inputName} value={props.title} defaultChecked={props.default}/>
+        <input id={props.title} type="radio" name={props.inputName} value={props.title} defaultChecked={props.default} onClick={() => dispatch(change(props.title.toLowerCase()))}/>
         <label htmlFor={props.title}>{props.title}</label>
     </div>
   )

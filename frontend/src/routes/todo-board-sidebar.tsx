@@ -9,7 +9,7 @@ const Sidebar = () => {
     <div className="flex flex-row w-screen h-full dark:bg-slate-800">
       <nav className="flex flex-col w-1/6 xl:w-[8%] py-12 border-r-2 border-slate-500 justify-between items-center">
         <div>
-          <h1 className="dark:text-white font-bold text-2xl">Naviagtion</h1>
+          <h1 className="dark:text-white font-bold text-2xl">Navigation</h1>
           <ul className="flex flex-col gap-3">
             <li>
               <SidebarLink to="/todo-boards/list" title="List of Todos"/>

@@ -5,7 +5,7 @@ import TodoBoardList from '../components/Todo-Board-List';
 import CalendarComponent from '../components/Calendar';
 
 type Props = {
-  type: string;
+  type: string,
 }
 
 function TodoComponent(props: Props) {
@@ -13,7 +13,7 @@ function TodoComponent(props: Props) {
   const [todoLists, setTodoLists] = useState<TodoTypeType[]>([]);
   const [isTitleUpdating, setIsTitleUpdating] = useState<boolean>(false);
   const [isDataUpdating, setIsDataUpdating] = useState<boolean>(false);
-
+  
   const BaseURL = new URL(import.meta.env.VITE_BACKEND_API_BASE_URL)
   
   useEffect(() => {

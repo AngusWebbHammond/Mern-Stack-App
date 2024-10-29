@@ -11,23 +11,27 @@ import ErrorPage from "./routes/error-page";
 import Navbar from "./routes/navbar";
 import TodoComponent from "./routes/todo-board";
 import Sidebar from "./routes/todo-board-sidebar";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navbar/>}>
-          <Route index element={<Home/>} />
-          <Route path="todo-boards/" element={<Sidebar/>} >
-            <Route index element={<></>}/>
-            <Route path="list" element={<TodoComponent type="List"/>}/>
-            <Route path="board" element={<TodoComponent type="Board"/>}/>
-            <Route path="calendar" element={<TodoComponent type="Calendar"/>}/>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navbar/>}>
+            <Route index element={<Home/>} />
+            <Route path="todo-boards/" element={<Sidebar/>} >
+              <Route index element={<></>}/>
+              <Route path="list" element={<TodoComponent type="List"/>}/>
+              <Route path="board" element={<TodoComponent type="Board"/>}/>
+              <Route path="calendar" element={<TodoComponent type="Calendar"/>}/>
+              <Route path="*" element={<ErrorPage/>}/>
+            </Route>
             <Route path="*" element={<ErrorPage/>}/>
           </Route>
-          <Route path="*" element={<ErrorPage/>}/>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 )

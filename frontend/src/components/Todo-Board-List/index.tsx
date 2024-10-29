@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
 import { TodoType, TodoTypeType } from "../../types/todo-board-types"
+import type { RootState } from '../../app/store'
+import { useSelector } from "react-redux";
 
 type Props = {
   data: TodoType[] | null,
-  todoLists: TodoTypeType[]
+  todoLists: TodoTypeType[],
 }
 
 const TodoBoardList = (props: Props) => {
   const [widths, setWidths] = useState<string[]>(['100px', '300px', '120px', '130px', '150px']);
   const [dataWithTypes, setDataWithTypes] = useState<TodoType[] | null>(null);
+  const sortType = useSelector((state: RootState) => state.sortingType.value)
 
   useEffect(() => {
     const dataNew: TodoType[] | null = [];
-    props.data?.sort((a, b) => {
-      if (a.type < b.type) {
+    props.data?.sort((a: any, b: any) => {
+      if (a[sortType] < b[sortType]) {
         return -1;
       }
-      if (a.type > b.type) {
+      if (a[sortType] > b[sortType]) {
         return 1;
       }
       return 0;
@@ -35,7 +38,7 @@ const TodoBoardList = (props: Props) => {
 
     setDataWithTypes(dataNew);
     return;
-  }, [props.data])
+  }, [props.data, sortType])
 
   
 
