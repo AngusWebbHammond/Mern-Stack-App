@@ -14,7 +14,7 @@ const Navbar = () => {
             <NaviationLink to="/" title="Home" type=""/>
           </li>
           <li>
-            <NaviationLink to="/todo-boards" title="Todo Board Types" type=""/>
+            <NaviationLink to="/todo-boards/board" title="Todo Board Types" type=""/>
           </li>
         </ul>
       </nav>

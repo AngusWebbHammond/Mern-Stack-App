@@ -22,7 +22,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path="/" element={<Navbar/>}>
             <Route index element={<Home/>} />
             <Route path="todo-boards/" element={<Sidebar/>} >
-              <Route index element={<></>}/>
               <Route path="list" element={<TodoComponent type="List"/>}/>
               <Route path="board" element={<TodoComponent type="Board"/>}/>
               <Route path="calendar" element={<TodoComponent type="Calendar"/>}/>
