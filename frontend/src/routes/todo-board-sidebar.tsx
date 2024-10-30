@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom"
 import SortingRadio from "../components/SortingRadio"
-import NaviationLink from "../components/SidebarLink"
+import NaviationLink from "../components/NavigationLink"
 
 const Sidebar = () => {
   const location = useLocation()

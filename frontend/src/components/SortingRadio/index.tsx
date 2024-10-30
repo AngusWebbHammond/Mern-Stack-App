@@ -8,6 +8,7 @@ type Props = {
 }
 
 const SortingRadio = (props: Props) => {
+  // Hooks
   const dispatch = useDispatch()
 
   return (

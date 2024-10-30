@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import TodoBoard from '../components/Todo-Board';
+import TodoBoard from '../components/TodoBoard';
 import type { TodoType, TodoTypeType } from '../types/todo-board-types';
-import TodoBoardList from '../components/Todo-Board-List';
+import TodoBoardList from '../components/TodoBoardList';
 import CalendarComponent from '../components/Calendar';
 
 type Props = {
@@ -9,22 +9,24 @@ type Props = {
 }
 
 function TodoComponent(props: Props) {
+  // Hooks
   const [data, setData] = useState<TodoType[] | null>(null);
   const [todoLists, setTodoLists] = useState<TodoTypeType[]>([]);
   const [isTitleUpdating, setIsTitleUpdating] = useState<boolean>(false);
   const [isDataUpdating, setIsDataUpdating] = useState<boolean>(false);
-  
-  const BaseURL = new URL(import.meta.env.VITE_BACKEND_API_BASE_URL)
   
   useEffect(() => {
     getAllTodo()
     getAllTodoType()
   }, [isDataUpdating, isTitleUpdating])
 
+  // Variables
   const h1TextStyling: string = 'text-black dark:text-white font-medium text-2xl flex justify-left';
   const h3TextStyling: string = 'text-gray-800 dark:text-gray-100 font-bold text-md flex justify-left items-center';
-  const h4TextStyling: string = 'text-gray-700 dark:text-gray-300 font-normal text-sm flex justify-left';
+  const h4TextStyling: string = 'text-gray-700 dark:text-gray-300 font-normal text-sm flex justify-left';  
+  const BaseURL = new URL(import.meta.env.VITE_BACKEND_API_BASE_URL)
 
+  // Functions
   function deleteTodoItem (id: string): void {
     const deleteTodoURL = new URL("todo/delete", BaseURL)
     deleteTodoURL.searchParams.append("_id", id)
@@ -67,8 +69,6 @@ function TodoComponent(props: Props) {
     const addNewTodoURL = new URL("todo/create", BaseURL)
 
     const deadline = new Date()
-
-    console.log(deadline.toDateString())
 
     const searchParameters = {
       title: "New Todo",

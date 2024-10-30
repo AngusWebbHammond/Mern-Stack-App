@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
-import NaviationLink from "../components/SidebarLink";
-
+import NaviationLink from "../components/NavigationLink";
 
 const Navbar = () => {
   return (

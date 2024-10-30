@@ -11,6 +11,7 @@ type Props = {
 
 const CalendarComponent = (props: Props) => {
   const eventDict: any[] = [];
+  
   props.data?.map((item) => {
     eventDict.push({
       title: item.title,

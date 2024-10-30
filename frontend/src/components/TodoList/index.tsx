@@ -1,6 +1,6 @@
-import AddNewTodo from "../Add-New-Todo"
-import TodoItem from "../Todo-Item"
-import TodoListTitle from "../Todo-List-Title"
+import AddNewTodo from "../AddNewTodo"
+import TodoItem from "../TodoItem"
+import TodoListTitle from "../TodoListTitle"
 import { TodoType, TodoTypeType } from "../../types/todo-board-types";
 
 type Props = {

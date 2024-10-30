@@ -1,0 +1,23 @@
+[
+    {
+        "image": "", 
+        "altText": "Board View",
+        "title": "Board View",
+        "description": "This view is the main one you will tend to always use throughout this todo application, as you can edit and create new todos from here.",
+        "imageLeft": true
+    },
+    {
+        "image": "", 
+        "altText": "List of Todos",
+        "title": "List of Todos",
+        "description": "List of Todos Description",
+        "imageLeft": false
+    },
+    {
+        "image": "", 
+        "altText": "Calendar",
+        "title": "Calendar",
+        "description": "Calendar View Description",
+        "imageLeft": true
+    }
+]
