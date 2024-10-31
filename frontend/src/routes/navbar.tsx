@@ -10,10 +10,14 @@ const Navbar = () => {
         </div>
         <ul className="flex flex-row gap-2">
           <li>
-            <NaviationLink to="/" title="Home" type=""/>
+            <NaviationLink to="/" title="Home" type="" />
           </li>
           <li>
-            <NaviationLink to="/todo-boards/board" title="Todo Board Types" type=""/>
+            <NaviationLink
+              to="/todo-boards/board"
+              title="Todo Board Types"
+              type=""
+            />
           </li>
         </ul>
       </nav>
@@ -21,7 +25,7 @@ const Navbar = () => {
         <Outlet />
       </div>
     </div>
-  )
+  );
 };
 
 export default Navbar;
